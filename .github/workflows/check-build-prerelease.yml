@@ -63,8 +63,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: meshtastic/firmware
-          ref: ${{ steps.get_release.outputs.tag }}   # should be v2.7.17.83c6161
-          fetch-depth: 0                               # ensure tags/history available
+          ref: ${{ steps.get_release.outputs.tag }}
+          fetch-depth: 0
           submodules: 'recursive'
           path: firmware
       
