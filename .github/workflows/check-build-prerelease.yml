@@ -65,8 +65,8 @@ jobs:
           git clone https://github.com/meshtastic/firmware.git
           cd firmware
           # Fetch that exact tag and check it out
-          git fetch --depth=1 origin "refs/tags/${{ steps.get_release.outputs.tag }}:refs/tags/${{ steps.get_release.outputs.tag }}"
-          git checkout -q "tags/${{ steps.get_release.outputs.tag }}" -b build-at-release
+          git fetch --depth=1 origin "refs/tags/v${{ steps.get_release.outputs.tag }}:refs/tags/v${{ steps.get_release.outputs.tag }}"
+          git checkout -q "tags/v${{ steps.get_release.outputs.tag }}" -b build-at-release
           git submodule update --init --recursive
           
       - name: Patch platformio.ini for OLED_RU
