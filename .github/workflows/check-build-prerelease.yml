@@ -76,8 +76,8 @@ jobs:
         run: |
           ls firmware/.pio/build/heltec-v3/
           cd firmware/.pio/build/heltec-v3
-          mv firmware.bin heltec-v3-ru-firmware-${{ steps.get_release.outputs.tag }}.bin
-          mv firmware.factory.bin heltec-v3-ru-factory-${{ steps.get_release.outputs.tag }}.bin
+          mv firmware-heltec-v3-${{ steps.get_release.outputs.tag }}.bin heltec-v3-ru-firmware-${{ steps.get_release.outputs.tag }}.bin
+          mv firmware-heltec-v3-${{ steps.get_release.outputs.tag }}.factory.bin heltec-v3-ru-factory-${{ steps.get_release.outputs.tag }}.bin
 
       - name: Generate checksums
         if: steps.check_release.outputs.skip_build == 'false'
