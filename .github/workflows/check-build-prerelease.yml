@@ -59,15 +59,23 @@ jobs:
 #          cd firmware
 #          git submodule update --init --recursive
 
-      - name: Clone Meshtastic firmware at latest prerelease
-        if: steps.check_release.outputs.skip_build == 'false'
+      - name: Checkout firmware at exact release tag
+        uses: actions/checkout@v4
+        with:
+          repository: meshtastic/firmware
+          ref: ${{ steps.get_release.outputs.tag }}   # should be v2.7.17.83c6161
+          fetch-depth: 0                               # ensure tags/history available
+          submodules: 'recursive'
+      
+      - name: Verify checkout
         run: |
-          git clone https://github.com/meshtastic/firmware.git
-          cd firmware
-          # Fetch that exact tag and check it out
-          git fetch --depth=1 origin "refs/tags/v${{ steps.get_release.outputs.tag }}:refs/tags/v${{ steps.get_release.outputs.tag }}"
-          git checkout -q "tags/v${{ steps.get_release.outputs.tag }}" -b build-at-release
-          git submodule update --init --recursive
+          echo "Requested tag: ${{ steps.get_release.outputs.tag }}"
+          git --no-pager show -s --format='HEAD=%H%nREFS=%D' HEAD
+          echo "git describe: $(git describe --tags --long --always || true)"
+          echo "Tags pointing at HEAD:"
+          git tag --points-at HEAD || true
+          echo "Submodule status:"
+          git submodule status --recursive || true
           
       - name: Patch platformio.ini for OLED_RU
         if: steps.check_release.outputs.skip_build == 'false'
