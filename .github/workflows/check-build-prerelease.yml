@@ -66,6 +66,7 @@ jobs:
           ref: ${{ steps.get_release.outputs.tag }}   # should be v2.7.17.83c6161
           fetch-depth: 0                               # ensure tags/history available
           submodules: 'recursive'
+          path: firmware
       
       - name: Verify checkout
         run: |
