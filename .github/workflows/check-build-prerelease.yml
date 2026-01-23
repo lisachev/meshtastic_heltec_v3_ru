@@ -90,8 +90,6 @@ jobs:
         run: |
           ls firmware/.pio/build/heltec-v3/
           cd firmware/.pio/build/heltec-v3
-#          mv firmware-heltec-v3-${{ steps.get_release.outputs.tag }}.bin heltec-v3-ru-firmware-${{ steps.get_release.outputs.tag }}.bin
-#          mv firmware-heltec-v3-${{ steps.get_release.outputs.tag }}.factory.bin heltec-v3-ru-factory-${{ steps.get_release.outputs.tag }}.bin
           for f in *-v3-*.bin; do [[ "$f" == *-v3-ru-* ]] && continue; mv -- "$f" "${f/-v3-/-v3-ru-}"; done
 
       - name: Generate checksums
