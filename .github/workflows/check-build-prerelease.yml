@@ -92,6 +92,7 @@ jobs:
           ls firmware/.pio/build/heltec-v3/
           cd firmware/.pio/build/heltec-v3
           for f in *-v3-*.bin; do [[ "$f" == *-v3-ru-* ]] && continue; mv -- "$f" "${f/-v3-/-v3-ru-}"; done
+          ls
 
       - name: Generate checksums
         if: steps.check_release.outputs.skip_build == 'false'
