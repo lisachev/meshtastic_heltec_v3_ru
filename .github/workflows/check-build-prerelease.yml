@@ -83,6 +83,7 @@ jobs:
         if: steps.check_release.outputs.skip_build == 'false'
         run: |
           cd firmware
+          pio run -e heltec-v3 -t buildfs --disable-auto-clean
           pio run -e heltec-v3
 
       - name: Rename binaries with versioned names
