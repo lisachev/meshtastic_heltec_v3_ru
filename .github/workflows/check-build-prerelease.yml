@@ -99,7 +99,7 @@ jobs:
         id: checksum
         run: |
           cd firmware/.pio/build/heltec-v3
-          for f in heltec-v3-ru-*.bin; do
+          for f in firmware-heltec-v3-ru-*.bin; do
             sha256sum "$f" >> SHA256SUMS.txt
           done
           echo "Checksums generated:"
@@ -111,7 +111,7 @@ jobs:
         with:
           name: heltec-v3-${{ steps.get_release.outputs.ru_tag }}
           path: |
-            firmware/.pio/build/heltec-v3/heltec-v3-ru-*.bin
+            firmware/.pio/build/heltec-v3/firmware-heltec-v3-ru-*.bin
             firmware/.pio/build/heltec-v3/SHA256SUMS.txt
 
       - name: Publish GitHub Release
@@ -132,7 +132,7 @@ jobs:
             Firmware attached below 👇
           prerelease: true
           files: |
-            firmware/.pio/build/heltec-v3/heltec-v3-ru-*.bin
+            firmware/.pio/build/heltec-v3/firmware-heltec-v3-ru-*.bin
             firmware/.pio/build/heltec-v3/SHA256SUMS.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
